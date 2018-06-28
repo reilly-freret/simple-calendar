@@ -1,0 +1,2 @@
+Event names must be fewer than 150 characters (specified by data type in db)
+Gotta check on how queries deal with dates... wiki says they need to be strings, but is there dynamic type conversion?

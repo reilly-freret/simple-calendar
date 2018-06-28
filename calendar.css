@@ -1,0 +1,162 @@
+/* start w3 css help */
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url('http://themes.googleusercontent.com/static/fonts/opensans/v5/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff') format('woff');
+}
+
+html {
+  font-family: 'open sans';
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #157EFB;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+
+li a:hover {
+  background-color: #111;
+}
+
+/* end w3 css help */
+
+body {
+  background-color: #F1F1F1;
+}
+
+#loginbox {
+  padding-top: 10px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  color: black;
+}
+
+.blinky {
+  color: black;
+}
+
+#message {
+  padding-top: 100px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  color: black;
+}
+
+#body {
+  width: 100%;
+}
+
+#post-story {
+  text-align: center;
+}
+
+th {
+  font-size: 16pt;
+}
+
+tr {
+  text-align: center;
+  padding: 15px;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+  height: 50px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  overflow: auto;
+}
+
+#storytable {
+  padding-top: 70px;
+}
+
+#big-button {
+  position: fixed;
+  bottom: 0px;
+  width: 100px;
+  background-color: green;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.article {
+  width: 50%;
+  font-family: 'open sans';
+  margin: auto;
+}
+
+#headline {
+  font-size: 24pt;
+}
+
+.commentAction {
+  float: left;
+  padding: 5px;
+}
+
+#account_data {
+  padding-top: 60px;
+}
+
+#login { display:none }
+#register { display:none }
+#month{text-align: center; }
+#editEvent{display: none}
+#addEvent{ display:none }
+#eventPopupHTML {display: none}
+#reminderguy{display:none}
+#reminderguy2{display: none}
+#logouttab{display: none}
+#newevent{display: none}
+#filters{display: none}
+
+
+
+#calendar{ padding-top: 60px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center; }
+
+#previous
+{
+  padding: 10px 30px;
+}
+#next
+{
+  padding: 10px 50px;
+}
+#newevent
+{
+  padding: 10px 50px;
+}
+
+#addEvent_btn{padding: 10px 50px;}

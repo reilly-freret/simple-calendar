@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="calendar.css">
+  <title>Calendar</title>
+  <meta charset="UTF-8">
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/start/jquery-ui.css" type="text/css" rel="Stylesheet" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="ajax.js"></script>
+  <script type="text/javascript"src="//media.twiliocdn.com/sdk/js/client/v1.4/twilio.min.js"></script>
+  <script type="text/javascript">
+    function showLogin() {
+      //$("#register").dialog("close");
+      $("#login").dialog();
+    }
+
+    function showRegister() {
+      //$("#login").dialog("close");
+      $("#register").dialog();
+    }
+
+    function showaddEvent() {
+      //$("#login").dialog("close");
+      $("#addEvent").dialog();
+    }
+    $(function() {
+      $("#eventDate").datepicker(
+        {dateFormat: "yy-mm-dd"}
+      );
+    });
+    $(function() {
+      $("#remindDate").datepicker(
+        {dateFormat: "yy-mm-dd"}
+      );
+    });
+    $(function() {
+      $("#remindDate2").datepicker(
+        {dateFormat: "yy-mm-dd"}
+      );
+    });
+    $(function() {
+      $("#eventDate2").datepicker({
+        dateFormat: "yy-mm-dd"
+      });
+    });
+    function reminderguy() {
+      $("#reminderguy").toggle();
+    }
+    function reminderguy2() {
+      $("#reminderguy2").toggle();
+    }
+  </script>
+</head>
+
+
+<ul id="bar">
+  <li style="float:left; background-color: ;"><a class="active">Calendar</a></li>
+  <li style="float:left; background-color: ;"><a class="active" id="nameplate"></a></li>
+  <li id="logintab" style="float:right; background-color: black;"><a class="active" onclick=showLogin()>Login</a></li>
+  <li id="registertab"style="float:right; background-color: ;"><a class="active" onclick=showRegister()>Register</a></li>
+  <li id="logouttab"style="float:right; background-color:red;"><a class="active" onclick=logout()>Logout</a></li>
+</ul>
+
+
+<div id="login" title="Login">Login
+  <label for="username" class="blinky">Username:</label>
+  <input type="text" name="username" id="lusername"  required />
+  </p>
+  <p>
+    <label for="password" class="blinky">Password:</label>
+    <input type="Password" name="password" id="lpassword"  required />
+  </p>
+  <p>
+    <button id="login_btn" onclick="loginAjax()">Log In</button>
+  </p>
+</div>
+
+<div id="register" title="Register">Register
+  <label for="username" class="blinky">Username:</label>
+  <input type="text" name="username" id="rusername"  required />
+  </p>
+  <p>
+    <label for="password" class="blinky">Password:</label>
+    <input type="Password" name="password" id="rpassword"  required />
+  </p>
+  <p>
+    <button id="register_btn" onclick="registerAjax()">Register</button>
+  </p>
+</div>
+
+
+<div id="addEvent" title="Add Event">
+  <label for="eventName" class="blinky">Event Name:</label>
+  <input type="text" name="eventName" id="eventName" />
+  <p>
+    <label for="eventDate" class="blinky">Date:</label>
+    <input type="text" id="eventDate">
+  </p>
+  <p>
+    <label for="eventTime" class="blinky">Time:</label>
+    <input id="eventTime" type="time">
+  </p>
+  <p>
+    Tags (at least one req'd):
+    <label for="school" class="blinky">School:</label>
+    <input type="checkbox" id="school" value="1" name="checked">
+    <label for="work" class="blinky">Work:</label>
+    <input type="checkbox" id="work" value="1" name="checked">
+    <label for="personal" class="blinky">Personal:</label>
+    <input type="checkbox" id="personal" value="1" name="checked">
+  </p>
+
+
+  <div id="reminderguy">
+    <p>
+      <label for="remindDate" oninput="maxDate()" class="blinky">Date:</label>
+      <input type="text" id="remindDate">
+    </p>
+
+    <p>
+      <label for="remindTime" class="blinky">Time:</label>
+      <input id="remindTime" type="time">
+    </p>
+  </div>
+  <p>
+    <button id="addEvent_btn" onclick="newEvent()">Add Event</button>
+  </p>
+</div>
+
+<div id="calendar">
+  <h1> <span id="month"> Month</span> <span id="year">Year</span> </h1>
+  <button type="button" id="previous" onclick="backMonth()">Previous</button>
+  <button type="button" id="newevent" onclick="showaddEvent()">New Event</button>
+  <button type="button" id="next" onclick="frontMonth()">Next</button>
+
+<div id="filters"><span>
+  <h2>Filter Tags</h2>
+  <input type="checkbox" name="filter" value="1" id="filterschool" onchange="filter()" checked>School<br>
+  <input type="checkbox" name="filter" value="1" onchange="filter()" id="filterpersonal" checked>Personal<br>
+  <input type="checkbox" name="filter" value="1" onchange="filter()"id="filterwork" checked>Work<br>
+</span></div>
+
+  <table style="width:100%">
+    <tr>
+      <th>Su</th>
+      <th>M</th>
+      <th>T</th>
+      <th>W</th>
+      <th>Th</th>
+      <th>Fr</th>
+      <th>Sa</th>
+    </tr>
+    <tr>
+      <td id="1"></td>
+      <td id="2"></td>
+      <td id="3"></td>
+      <td id="4"></td>
+      <td id="5"></td>
+      <td id="6"></td>
+      <td id="7"></td>
+    </tr>
+    <tr>
+      <td id="8"></td>
+      <td id="9"></td>
+      <td id="10"></td>
+      <td id="11"></td>
+      <td id="12"></td>
+      <td id="13"></td>
+      <td id="14"></td>
+    </tr>
+    <tr>
+      <td id="15"></td>
+      <td id="16"></td>
+      <td id="17"></td>
+      <td id="18"></td>
+      <td id="19"></td>
+      <td id="20"></td>
+      <td id="21"></td>
+    </tr>
+    <tr>
+      <td id="22"></td>
+      <td id="23"></td>
+      <td id="24"></td>
+      <td id="25"></td>
+      <td id="26"></td>
+      <td id="27"></td>
+      <td id="28"></td>
+    </tr>
+    <tr>
+      <td id="29"></td>
+      <td id="30"></td>
+      <td id="31"></td>
+      <td id="32"></td>
+      <td id="33"></td>
+      <td id="34"></td>
+      <td id="35"></td>
+    </tr>
+    <tr>
+      <td id="36"></td>
+      <td id="37"></td>
+      <td id="38"></td>
+      <td id="39"></td>
+      <td id="40"></td>
+      <td id="41"></td>
+      <td id="42"></td>
+    </tr>
+  </table>
+</div>
+
+<div id="debug">
+</div>
+
+<div id="eventPopupHTML" title="Event">
+  <div id="eventName1">
+    Name:
+  </div>
+  <div id="eventDate1">
+    Date:
+  </div>
+  <div id="eventTime1">
+    Time:
+  </div>
+  <div id="complete1">
+    Complete:
+  </div>
+  <div id="alert1">
+  </div>
+  <div id="alertDate1">
+  </div>
+  <div id="alertTime1">
+  </div><br>
+  <div id="deleteButton">
+  </div>
+  <div>
+
+    <label for="phonenumber" class="blinky">Want a Text Message of These Details,
+      Enter Your Phone number(XXXXXXXXXX):</label>
+    <input type="text" name="phonenumber" id="textnumber"/>
+    <button id="textbtn" onclick="twilio()">Text Me!</button>
+  </div>
+
+
+</div>
+
+<div id="editEvent" title="Edit Event">
+  <label for="eventName2" class="blinky">Event Name:</label>
+  <input type="text" name="eventName2" id="eventName2" />
+  <p>
+    <label for="eventDate2" class="blinky">Date:</label>
+    <input type="text" id="eventDate2">
+  </p>
+  <p>
+    <label for="eventTime2" class="blinky">Time:</label>
+    <input id="eventTime2" type="time">
+  </p>
+  <p>
+    Tags (at least one req'd):
+    <label for="school1" class="blinky">School:</label>
+    <input type="checkbox" id="school1" value="1" name="checked">
+    <label for="work1" class="blinky">Work:</label>
+    <input type="checkbox" id="work1" value="1" name="checked">
+    <label for="personal1" class="blinky">Personal:</label>
+    <input type="checkbox" id="personal1" value="1" name="checked">
+  </p>
+
+
+  <div id="reminderguy2">
+    <p>
+      <label for="remindDate2" oninput="maxDate()" class="blinky">Date:</label>
+      <input type="text" id="remindDate2">
+    </p>
+
+    <p>
+      <label for="remindTime2" class="blinky">Time:</label>
+      <input id="remindTime2" type="time">
+    </p>
+  </div>
+  <p>
+    <button id="addEvent_btn2" onclick="updateEvent()">Update Event</button>
+  </p>
+</div>
+
+</html>
